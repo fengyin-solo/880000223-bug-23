@@ -3,19 +3,18 @@ import { computed } from 'vue'
 import {
   restorationBatches,
   restorationEnvironment,
-  restorationTasks,
 } from '../data/restorationData'
+import { useRestorationBoard } from './useRestorationBoard'
 
 export function useRestorationOverview() {
+  const { openTaskCount, highRiskCount, ownerCount } = useRestorationBoard()
+
   const batchCount = computed(() => restorationBatches.length)
-  const highRiskCount = computed(
-    () => restorationTasks.filter((item) => item.risk === 'high').length,
-  )
   const environmentCount = computed(() => restorationEnvironment.length)
-  const ownerCount = computed(() => new Set(restorationTasks.map((item) => item.owner)).size)
 
   return {
     batchCount,
+    openTaskCount,
     highRiskCount,
     environmentCount,
     ownerCount,

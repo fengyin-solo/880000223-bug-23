@@ -65,26 +65,103 @@ export const restorationSteps = [
   '平整定型 8 小时后转入无酸盒暂存。',
 ]
 
+// 角色：lead 修复负责人（有变更资格）、restorer 修复师、viewer 观看（不承接任务）
+// active=false 表示已停用，停用人员不能再被写回任务负责人
+export const restorationStaff = [
+  { id: 'S-01', name: '韩澈', role: 'lead', active: true },
+  { id: 'S-02', name: '陆宁', role: 'restorer', active: true },
+  { id: 'S-03', name: '周恬', role: 'restorer', active: true },
+  { id: 'S-04', name: '沈观', role: 'viewer', active: true },
+  { id: 'S-05', name: '江杳', role: 'restorer', active: false },
+]
+
+// ownerHistory 保留历任负责人；closedAt 非空表示已封存的历史任务
 export const restorationTasks = [
   {
+    id: 'T-01',
     title: '明抄本县志残卷',
     stage: '补纸前',
     risk: 'high',
-    owner: '韩澈',
+    ownerId: 'S-01',
+    ownerName: '韩澈',
     note: '虫道贯穿标题栏，需先固色。',
+    version: 1,
+    closedAt: null,
+    ownerHistory: [
+      {
+        ownerId: 'S-01',
+        ownerName: '韩澈',
+        changedAt: '2026-09-01',
+        changedByName: '系统建档',
+        reason: '初次派工',
+      },
+    ],
   },
   {
+    id: 'T-02',
     title: '碑帖拓片册页',
     stage: '控湿中',
     risk: 'medium',
-    owner: '陆宁',
+    ownerId: 'S-02',
+    ownerName: '陆宁',
     note: '边缘卷曲，可延后压平。',
+    version: 1,
+    closedAt: null,
+    ownerHistory: [
+      {
+        ownerId: 'S-02',
+        ownerName: '陆宁',
+        changedAt: '2026-09-01',
+        changedByName: '系统建档',
+        reason: '初次派工',
+      },
+    ],
   },
   {
+    id: 'T-03',
     title: '戏曲抄本散页',
     stage: '归档前',
     risk: 'low',
-    owner: '周恬',
+    ownerId: 'S-03',
+    ownerName: '周恬',
     note: '等待封套尺寸确认。',
+    version: 1,
+    closedAt: null,
+    ownerHistory: [
+      {
+        ownerId: 'S-03',
+        ownerName: '周恬',
+        changedAt: '2026-09-02',
+        changedByName: '系统建档',
+        reason: '初次派工',
+      },
+    ],
+  },
+  {
+    id: 'T-04',
+    title: '线装医书零本',
+    stage: '已归档',
+    risk: 'low',
+    ownerId: 'S-02',
+    ownerName: '陆宁',
+    note: '整托完成后已入无酸盒封存。',
+    version: 2,
+    closedAt: '2026-09-05',
+    ownerHistory: [
+      {
+        ownerId: 'S-05',
+        ownerName: '江杳',
+        changedAt: '2026-08-02',
+        changedByName: '系统建档',
+        reason: '初次派工',
+      },
+      {
+        ownerId: 'S-02',
+        ownerName: '陆宁',
+        changedAt: '2026-08-21',
+        changedByName: '韩澈',
+        reason: '江杳调岗，交接压平工序',
+      },
+    ],
   },
 ]
