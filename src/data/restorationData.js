@@ -65,26 +65,49 @@ export const restorationSteps = [
   '平整定型 8 小时后转入无酸盒暂存。',
 ]
 
+export const restorationPersonnel = [
+  { id: 'p-hanche', name: '韩澈', role: 'restorer', status: 'active', canReassign: true },
+  { id: 'p-luning', name: '陆宁', role: 'restorer', status: 'active', canReassign: false },
+  { id: 'p-zhoutian', name: '周恬', role: 'restorer', status: 'active', canReassign: false },
+  { id: 'p-shenguan', name: '沈观', role: 'viewer', status: 'active', canReassign: false },
+  { id: 'p-qinyan', name: '秦砚', role: 'restorer', status: 'deactivated', canReassign: false },
+]
+
 export const restorationTasks = [
   {
+    id: 'task-a03',
     title: '明抄本县志残卷',
     stage: '补纸前',
     risk: 'high',
-    owner: '韩澈',
+    ownerId: 'p-hanche',
     note: '虫道贯穿标题栏，需先固色。',
   },
   {
+    id: 'task-b11',
     title: '碑帖拓片册页',
     stage: '控湿中',
     risk: 'medium',
-    owner: '陆宁',
+    ownerId: 'p-luning',
     note: '边缘卷曲，可延后压平。',
   },
   {
+    id: 'task-c02',
     title: '戏曲抄本散页',
     stage: '归档前',
     risk: 'low',
-    owner: '周恬',
+    ownerId: 'p-zhoutian',
     note: '等待封套尺寸确认。',
+  },
+]
+
+export const restorationOwnerHistory = [
+  {
+    id: 'change-1',
+    taskId: 'task-c02',
+    fromOwnerId: 'p-qinyan',
+    toOwnerId: 'p-zhoutian',
+    operatorId: 'p-hanche',
+    changedAt: '2026-09-18T09:30:00.000Z',
+    note: '秦砚停用前转交周恬收尾。',
   },
 ]

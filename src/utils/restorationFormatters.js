@@ -16,3 +16,12 @@ export function riskMeta(risk) {
 
   return map[risk] ?? map.low
 }
+
+export function formatChangeTime(value) {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return value
+
+  const pad = (num) => String(num).padStart(2, '0')
+  const day = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
+  return `${day} ${pad(date.getHours())}:${pad(date.getMinutes())}`
+}

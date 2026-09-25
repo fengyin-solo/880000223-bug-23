@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+
 import PanelSection from '../components/common/PanelSection.vue'
 import StatCard from '../components/common/StatCard.vue'
 import BatchGrid from '../components/restoration/BatchGrid.vue'
@@ -15,12 +17,13 @@ import { useRestorationOverview } from '../composables/useRestorationOverview'
 const { batchCount, environmentCount, highRiskCount, ownerCount } =
   useRestorationOverview()
 
-const statCards = [
+// 保持 computed，负责人变更后从任务清单返回看板时数量同步刷新。
+const statCards = computed(() => [
   { label: '在册批次', value: batchCount.value },
   { label: '高风险任务', value: highRiskCount.value },
   { label: '环境指标', value: environmentCount.value },
   { label: '参与修复师', value: ownerCount.value },
-]
+])
 </script>
 
 <template>
